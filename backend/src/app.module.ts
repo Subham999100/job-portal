@@ -4,17 +4,18 @@ import { RequestLoggerMiddleware } from './common/middleware/request-logger.midd
 import { AppConfigModule } from './config/config.module';
 import { DatabaseModule } from './database/database.module';
 import { HealthModule } from './health/health.module';
+import { AuthModule } from './modules/auth/auth.module';
 
 /**
  * AppModule is the root module of the modular monolith.
  *
  * Responsibilities:
- * 1. Coordinates global feature modules (Config, Database, Health).
+ * 1. Coordinates global feature modules (Config, Database, Health, Auth).
  * 2. Mounts cross-cutting HTTP middleware (Correlation ID, Request Logging).
  * 3. Serves as the aggregation point where future domain modules will be registered.
  */
 @Module({
-  imports: [AppConfigModule, DatabaseModule, HealthModule],
+  imports: [AppConfigModule, DatabaseModule, HealthModule, AuthModule],
 })
 export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer): void {
